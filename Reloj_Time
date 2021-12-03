@@ -1,0 +1,92 @@
+// include the library code:
+#include <LiquidCrystal.h>
+
+// initialize the library by associating any needed LCD interface pin
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+int hora = 28;
+int minuto = 8;
+int segundo = 0;
+
+//variables para parar el equipo 
+int hora2 = 28;
+int minuto2 = 10;
+int segundo2 = 0;
+
+void setup() {
+  lcd.begin(16, 2); // Define el tamaño del LCD que se va a ocupar
+}
+
+void loop() 
+{
+  //if que indica el tiempo finalizado del tiempo en la pantalla
+  if((hora==hora2)and(minuto==minuto2)and(segundo==segundo2))
+  {
+    lcd.setCursor(0, 0);
+    lcd.print("    Fin TIMER     ");
+    lcd.setCursor(0, 1);
+    lcd.print("                  ");
+  }
+  
+ else
+  {
+   lcd.setCursor(0, 0);
+   lcd.print("    Reloj     ");
+  
+   lcd.setCursor(0, 1);
+   lcd.print("      ");
+  
+   if(hora>=10)
+   {
+   lcd.print(hora);
+   }
+   else
+   {
+    lcd.print("0");
+    lcd.print(hora);
+   }
+  
+   lcd.print(":");
+   if(minuto>=10)
+   {
+   lcd.print(minuto);
+   }
+   else
+   {
+     lcd.print("0");
+     lcd.print(minuto);
+   }
+  
+   lcd.print(":");
+   if(segundo>=10)
+   {
+   lcd.print(segundo);
+   }
+   else
+   {
+    lcd.print("0");
+    lcd.print(segundo);
+   }
+
+   lcd.print("   ");
+  
+   segundo++;
+   delay(1000);
+  
+   if(segundo==60)
+   {
+    segundo=0;
+    minuto++;
+    if(minuto==60)
+    {
+      minuto=0;
+      hora++;
+      if(hora==24)
+      {
+        hora=0;
+      }
+     }
+   }
+  } 
+}
+
